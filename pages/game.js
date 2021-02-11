@@ -18,29 +18,39 @@ function getRandomDigit(){
 }
 
 
-export default function Result(){
+export default function Game(){
+	const screenStates = {
+		DISPLAY: 'DISPLAY',
+		GAME: 'GAME',
+		RESULT: 'RESULT',
+	  };
 	
+	const [screenState, setScreenState] = useState( screenStates.DISPLAY );   
 	const firstDigit = getRandomDigit(); 
-	const [ solution, setSolution ] = useState([ firstDigit, 4,2,4,2,4,2 ]);
+	const [ solution, setSolution ] = useState([ firstDigit, 4,2 ]);
 	const [ index, setIndex ] = useState( 0 );
+	const [ keyPressed, setKeyPressed ] = useState( undefined );
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			setIndex( index+1 );
+			(index < solution.length) ? setIndex( index+1 ) : setScreenState(screenStates.GAME);
+			console.log("indice: ", index, "digito: ", solution[index])
 		}, 300);
 		return () => clearTimeout(timer);
-	}, );
+	}, [index]);
 
 	function keyClicked(e){
-		const keyPressed = e.target.dataset.key;
 		e.preventDefault();
+		setKeyPressed(e.target.dataset.key);
 	}
+
+	const digit = solution[index];
 
 	return (
 		<Background>
 			<GameContainer>
 				<Display>
-					<h2> { solution[index] } </h2>
+					<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
 				</Display>
 					<Keyboard>
 						{keys.map((row)=>{
