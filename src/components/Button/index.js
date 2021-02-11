@@ -9,7 +9,7 @@ const Button = styled.button`
   width: 100%;
   padding: 2rem;
   font-family: inherit;
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   margin: 2rem 0;
   line-height: 1;
   outline: 0;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Header = styled.header`
-  height: 6rem;
+  height: 4rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -12,8 +12,8 @@ const Header = styled.header`
   a{
     margin: 2rem;
     display: block;
-    height: 4rem;
-    width: 4rem;
+    height: 2rem;
+    width: 2rem;
   }
 `
 
