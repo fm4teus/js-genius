@@ -1,10 +1,38 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Button from '../src/components/Button';
+import Link from '../src/components/Link';
+import Background from '../src/components/Background';
+import Container from '../src/components/Container';
+import Header from '../src/components/Header';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
+const LogoContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`
+
+const HeaderIndex = styled(Header)`
+  justify-content: flex-end;
 `
 
 export default function Home() {
-  return <Title>My page</Title>
+  return (
+    <Background>
+      <Container>
+        <HeaderIndex>
+          <Link href="/ranking">
+            <img src="../assets/ranking.svg" alt="ranking" />
+          </Link>
+        </HeaderIndex>
+        <LogoContainer>
+          <img src="../assets/logo.svg" alt="logo" />
+        </LogoContainer>
+        <Link href="/result">
+          <Button>Iniciar Jogo</Button>
+        </Link>
+      </Container>
+    </Background>
+  );
 }
