@@ -18,6 +18,8 @@ function getRandomDigit(){
 }
 
 
+
+
 export default function Game(){
 	const screenStates = {
 		DISPLAY: 'DISPLAY',
@@ -27,8 +29,10 @@ export default function Game(){
 	
 	const [screenState, setScreenState] = useState( screenStates.DISPLAY );   
 	const firstDigit = getRandomDigit(); 
-	const [ solution, setSolution ] = useState([ firstDigit, 4,2 ]);
-	const [ index, setIndex ] = useState( 0 );
+	const [ solution, setSolution ] = useState([ firstDigit ]);
+	const [ index, setIndex ] = useState(0);
+	const [ answerIndex, setAnswerIndex ] = useState(0);
+
 	const [ keyPressed, setKeyPressed ] = useState( undefined );
 
 	useEffect(() => {
@@ -39,9 +43,32 @@ export default function Game(){
 		return () => clearTimeout(timer);
 	}, [index]);
 
+	function nextLevel(){
+		setSolution([...solution, getRandomDigit() ]);
+		setAnswerIndex(0);
+		setScreenState(screenStates.DISPLAY);
+		setIndex(0);
+	}
+
 	function keyClicked(e){
 		e.preventDefault();
-		setKeyPressed(e.target.dataset.key);
+		const key = e.target.dataset.key
+		setKeyPressed(key);
+		
+		if(key == solution[answerIndex]){ 
+			console.log("CERTA RESPOSTA");
+			if( answerIndex === index-1 ){
+				console.log("-------PARABENS--------")
+				setTimeout(()=>{ setKeyPressed( undefined ) }, 1000)
+				setTimeout(()=>{ nextLevel() }, 2000)
+			}
+		}else{
+			setScreenState(screenStates.RESULT)
+			console.log("GAME OVER");
+		}
+		setAnswerIndex(answerIndex+1);
+		
+		console.log("key: ", key, "solution_ans_index: ", solution[answerIndex], "index_answer: ", answerIndex, "INDEX: ", index);
 	}
 
 	const digit = solution[index];
@@ -49,9 +76,10 @@ export default function Game(){
 	return (
 		<Background>
 			<GameContainer>
-				<Display>
-					<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
-				</Display>
+				{ screenState != screenStates.RESULT && <>
+					<Display>
+						<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
+					</Display>
 					<Keyboard>
 						{keys.map((row)=>{
 							return(
@@ -61,6 +89,8 @@ export default function Game(){
 							)
 						})}
 					</Keyboard>
+				</>}
+
 			</GameContainer>
 		</Background>
 	);

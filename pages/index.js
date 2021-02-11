@@ -29,7 +29,7 @@ export default function Home() {
         <LogoContainer>
           <img src="../assets/logo.svg" alt="logo" />
         </LogoContainer>
-        <Link href="/result">
+        <Link href="/game">
           <Button>Iniciar Jogo</Button>
         </Link>
       </Container>
