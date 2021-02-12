@@ -18,8 +18,13 @@ function getRandomDigit(){
 	return Math.floor(Math.random()*9)+1;
 }
 
-
-
+function resultScreen(){
+	return(
+		<>
+		
+		</>
+	);
+}
 
 export default function Game(){
 	const screenStates = {
@@ -90,10 +95,10 @@ export default function Game(){
 						<motion.div
 							transition={{ delay: 0, duration: 0.3 }}
 							variants={{
-							  show: { opacity: [0,1,1,0] },
+							  show: { opacity: [0,1,1,1,1,0] },
 							  static: { opacity: 1 },
 							}}
-							initial="show"
+							initial="static"
 							animate={animate ? "show" : "static" }>
 							<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
 						</motion.div>
