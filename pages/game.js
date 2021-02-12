@@ -5,6 +5,7 @@ import Keyboard from '../src/components/Keyboard';
 import Key from '../src/components/Key';
 import Display from '../src/components/Display';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 
 const GameContainer = styled(Container)`
@@ -32,12 +33,20 @@ export default function Game(){
 	const [ solution, setSolution ] = useState([ firstDigit ]);
 	const [ index, setIndex ] = useState(0);
 	const [ answerIndex, setAnswerIndex ] = useState(0);
-
+	
+	const [ animate, setAnimate ] = useState(true);
+	
 	const [ keyPressed, setKeyPressed ] = useState( undefined );
 
 	useEffect(() => {
+		setAnimate(true);
 		const timer = setTimeout(() => {
-			(index < solution.length) ? setIndex( index+1 ) : setScreenState(screenStates.GAME);
+			if(index < solution.length){
+				setIndex( index+1 )
+			}else{
+				setScreenState(screenStates.GAME);
+				setAnimate(false);
+			}
 			console.log("indice: ", index, "digito: ", solution[index])
 		}, 300);
 		return () => clearTimeout(timer);
@@ -78,7 +87,16 @@ export default function Game(){
 			<GameContainer>
 				{ screenState != screenStates.RESULT && <>
 					<Display>
-						<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
+						<motion.div
+							transition={{ delay: 0, duration: 0.3 }}
+							variants={{
+							  show: { opacity: [0,1,1,0] },
+							  static: { opacity: 1 },
+							}}
+							initial="show"
+							animate={animate ? "show" : "static" }>
+							<h2> { screenState === screenStates.GAME ? keyPressed : digit } </h2>
+						</motion.div>
 					</Display>
 					<Keyboard>
 						{keys.map((row)=>{
@@ -90,6 +108,7 @@ export default function Game(){
 						})}
 					</Keyboard>
 				</>}
+				{ screenState === screenStates.RESULT && solution.length-1}
 
 			</GameContainer>
 		</Background>
