@@ -10,7 +10,7 @@ const Button = styled.button`
   padding: 2rem;
   font-family: inherit;
   font-size: 1.5rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
   line-height: 1;
   outline: 0;
   transition: .3s;
@@ -20,7 +20,7 @@ const Button = styled.button`
     opacity: .5;
   }
   &:disabled {
-    background-color: #979797;
+    opacity: 0.8;
     cursor: not-allowed;
   }
 `;

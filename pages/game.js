@@ -7,6 +7,7 @@ import Display from '../src/components/Display';
 import Header from '../src/components/Header';
 import Link from '../src/components/Link';
 import Button from '../src/components/Button';
+import Input from '../src/components/Input';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
@@ -25,14 +26,56 @@ const HeaderResult = styled(Header)`
 `
 
 const Score = styled.div`
+	text-align: center;
+	h3{
+		margin: 0;
+		font-size: 1.1rem;
+		font-weight: 400;
+		color: ${({theme})=>theme.colors.textPrimary};
+	}
 	h2{
+		margin: 0;
 		font-size: 6rem;
+		font-weight: 400;
 		color: ${({theme})=>theme.colors.textPrimary};
 	}
 `
 
+function ScoreForm(){
+	const [name, setName] = useState('');
+
+	
+	return(
+		<form
+			style={{ width: "100%" }} 
+			onSubmit={(event) => {
+              	event.preventDefault();
+              	//router.push(`/quiz?name=${name}`);
+            	}}
+            >
+			<Input
+				name="nomeDoUsuario"
+				onChange={(infosDoEvento) => setName(infosDoEvento.target.value)}
+				placeholder="Digite seu nome"
+				value={name}
+			/>
+			<Button type="submit" disabled={name.length === 0}>
+				Salvar Ranking
+			</Button>
+        </form>
+
+	);
+}
+
+
 function ResultScreen( {score} ){
 	
+	const Title = styled.h1`
+		font-size: 3rem;
+		font-weight: 400;
+		color: ${({theme})=>theme.colors.textPrimary};
+	`
+
 	return(
 		<>
 			<Container>
@@ -41,12 +84,12 @@ function ResultScreen( {score} ){
 					<img src="../assets/fechar.svg" alt="fechar" />
 					</Link>
 				</HeaderResult>
+				<Title> Fim de jogo </Title>
 				<Score>
+					<h3>score</h3>
 					<h2>{score}</h2>
 				</Score>
-				<Link href="/game">
-					<Button>Iniciar Jogo</Button>
-				</Link>
+				<ScoreForm/>
 			</Container>
 		</>
 	);
@@ -129,8 +172,8 @@ export default function Game(){
 						<Keyboard>
 							{keys.map((row)=>{
 								return(
-									<tr>
-										{row.map((key) => <Key key={key} data-key={key} onClick={keyClicked}> {key} </Key>)}
+									<tr key={ `row__${row[2]/3}` }>
+										{row.map((key) => <Key key={`cell__${key}`} data-key={key} onClick={keyClicked}> {key} </Key>)}
 									</tr>
 								)
 							})}
