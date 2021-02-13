@@ -28,7 +28,7 @@ const theme = {
     textPrimary: '#E6D5B8',
     textSecondary: '#99A8B2',
   },
-  borderRadius: '1rem'
+  borderRadius: '0.625rem'
 }
 
 export default function App({ Component, pageProps }) {

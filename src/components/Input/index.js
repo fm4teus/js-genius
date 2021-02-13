@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const InputBase = styled.input`
   width: 100%;
+  height: 5rem;
   padding: 1rem;
   font-size: 1.5rem;
   border: 0.15rem solid ${({ theme }) => theme.colors.primary};

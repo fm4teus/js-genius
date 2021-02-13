@@ -10,10 +10,21 @@ import Button from '../src/components/Button';
 import Input from '../src/components/Input';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+
+const url = "https://us-central1-prova-front-letras.cloudfunctions.net/save";
 
 
 const GameContainer = styled(Container)`
 	justify-content: space-evenly;
+`
+
+
+
+const ResultContainer = styled.div`
+	display: grid;
+	grid-template-rows: 1.75fr 1fr;
+	height: 60%;
 `
 
 const keys = [[1,2,3],[4,5,6],[7,8,9]];
@@ -25,7 +36,7 @@ const HeaderResult = styled(Header)`
 	justify-content: flex-end;
 `
 
-const Score = styled.div`
+const ScoreDisplay = styled.div`
 	text-align: center;
 	h3{
 		margin: 0;
@@ -36,21 +47,38 @@ const Score = styled.div`
 	h2{
 		margin: 0;
 		font-size: 6rem;
+		line-height: 6rem;
 		font-weight: 400;
 		color: ${({theme})=>theme.colors.textPrimary};
 	}
 `
 
-function ScoreForm(){
+function ScoreForm( {score} ){
 	const [name, setName] = useState('');
-
+	
+	const router = useRouter();
 	
 	return(
 		<form
-			style={{ width: "100%" }} 
+			style={{ width: "89%" }} 
 			onSubmit={(event) => {
               	event.preventDefault();
-              	//router.push(`/quiz?name=${name}`);
+				  fetch(url, {
+					method: 'POST',
+					body: JSON.stringify({ name: name, score: score }),
+					headers: {
+						'content-type': 'application/json'
+					}
+				})
+				.then(function (data) { 
+					return data.json()	
+				})
+				.then(function (newScore) { 
+					console.log(newScore)
+					router.push("/ranking");
+				}).catch(function(error) {
+					console.log(error);
+				  });
             	}}
             >
 			<Input
@@ -71,6 +99,7 @@ function ScoreForm(){
 function ResultScreen( {score} ){
 	
 	const Title = styled.h1`
+		margin: 0;
 		font-size: 3rem;
 		font-weight: 400;
 		color: ${({theme})=>theme.colors.textPrimary};
@@ -84,12 +113,14 @@ function ResultScreen( {score} ){
 					<img src="../assets/fechar.svg" alt="fechar" />
 					</Link>
 				</HeaderResult>
-				<Title> Fim de jogo </Title>
-				<Score>
-					<h3>score</h3>
-					<h2>{score}</h2>
-				</Score>
-				<ScoreForm/>
+				<ResultContainer>
+					<Title> Fim de jogo </Title>
+					<ScoreDisplay>
+						<h3>score</h3>
+						<h2>{score}</h2>
+					</ScoreDisplay>
+				</ResultContainer>
+				<ScoreForm score={score} />
 			</Container>
 		</>
 	);
@@ -173,7 +204,12 @@ export default function Game(){
 							{keys.map((row)=>{
 								return(
 									<tr key={ `row__${row[2]/3}` }>
-										{row.map((key) => <Key key={`cell__${key}`} data-key={key} onClick={keyClicked}> {key} </Key>)}
+										{row.map((key) => <Key 
+															key={`cell__${key}`} 
+															data-key={key} 
+															onClick={keyClicked} 
+															disabled={screenState == screenStates.DISPLAY}
+															> {key} </Key>)}
 									</tr>
 								)
 							})}

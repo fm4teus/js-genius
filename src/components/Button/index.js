@@ -7,10 +7,12 @@ const Button = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 4px solid ${({theme})=> theme.colors.textSecondary};
   width: 100%;
-  padding: 2rem;
+  height: 5rem;
+  padding: 0;
   font-family: inherit;
   font-size: 1.5rem;
-  margin: 1rem 0;
+  margin: 0;
+  margin-bottom: 1.4rem;
   line-height: 1;
   outline: 0;
   transition: .3s;

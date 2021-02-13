@@ -7,7 +7,6 @@ const Background = styled.div`
   width: 100vw;
   min-width: 300px;
   min-height: 400px;
-  height: 100vh;
   background-color: ${({ theme })=> theme.colors.background};
 `
 

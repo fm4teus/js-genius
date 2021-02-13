@@ -6,15 +6,14 @@ const Container = styled.div`
   width: 100vw;
   max-width: 500px;
   min-width: 300px;
-  height: 100vh;
-  min-height: 400px;
+  min-height: 100vh;
   align-items: center;
   justify-content: space-between;
   img{
     width: 70%;
   }
   a{
-    width: 80%;
+    width: 89%;
   }
 `
 
