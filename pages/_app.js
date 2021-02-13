@@ -39,6 +39,7 @@ export default function App({ Component, pageProps }) {
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="title" content="JS G3N1U5 - Você é bom de memória?"/>
         <meta name="description" content="Venha enfrentar esse desafio, conquiste seu lugar entre os primeiros no Ranking!"/>
+        <meta name="theme-color" content="#1F6F8B"/>
 
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://js-genius.vercel.app/"/>
