@@ -158,11 +158,12 @@ export default function Game(){
 	
 	useEffect(() => {
 		setAnimate(true);
-		const synth = new Tone.Synth().toDestination();
-		//create a synth and connect it to the main output (your speakers)
-		//play a middle 'C' for the duration of an 8th note
 
+		// som 
+		const synth = new Tone.Synth().toDestination();
 		synth.triggerAttackRelease( notes[solution[index]] , "8n");
+
+
 		const timer = setTimeout(() => {
 			if(index < solution.length){
 				setIndex( index+1 )
@@ -186,6 +187,11 @@ export default function Game(){
 	function keyClicked(e){
 		e.preventDefault();
 		const key = e.target.dataset.key
+		//som
+		const synth = new Tone.Synth().toDestination();
+		synth.triggerAttackRelease( notes[key] , "8n");
+
+
 		setKeyPressed(key);
 		
 		if(key == solution[answerIndex]){ 
@@ -229,7 +235,7 @@ export default function Game(){
 										{row.map((key) => <Key 
 															key={`cell__${key}`} 
 															data-key={key} 
-															onClick={keyClicked} 
+															onClick={(screenState != screenStates.DISPLAY) && keyClicked} 
 															disabled={screenState == screenStates.DISPLAY}
 															> {key} </Key>)}
 									</tr>
