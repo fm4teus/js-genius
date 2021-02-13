@@ -34,7 +34,24 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Head>
+      <Head>            
+        <title>JS G3N1U5</title>
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="title" content="JS G3N1U5 - Você é bom de memória?"/>
+        <meta name="description" content="Venha enfrentar esse desafio, conquiste seu lugar entre os primeiros no Ranking!"/>
+
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://js-genius.vercel.app/"/>
+        <meta property="og:title" content="JS G3N1U5 - Você é bom de memória?"/>
+        <meta property="og:description" content="Venha enfrentar esse desafio, conquiste seu lugar entre os primeiros no Ranking!"/>
+        <meta property="og:image" content="/favicon.ico"/>
+
+        <meta property="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:url" content="https://js-genius.vercel.app/"/>
+        <meta property="twitter:title" content="JS G3N1U5 - Você é bom de memória?"/>
+        <meta property="twitter:description" content="Venha enfrentar esse desafio, conquiste seu lugar entre os primeiros no Ranking!"/>
+        <meta property="twitter:image" content="/favicon.ico"/>
+
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
       </Head>
