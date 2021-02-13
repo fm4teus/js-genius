@@ -28,6 +28,7 @@ function ScoreForm( {score} ){
 					console.log(newScore)
 					router.push("/ranking");
 				}).catch(function(error) {
+					alert("Ocorreu um erro :(");
 					console.log(error);
 				  });
             	}}

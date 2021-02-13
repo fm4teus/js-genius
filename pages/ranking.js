@@ -3,7 +3,6 @@ import Background from '../src/components/Background';
 import Container from '../src/components/Container';
 import Header from '../src/components/Header';
 import Link from '../src/components/Link';
-import Button from '../src/components/Button';
 import { useState, useEffect } from 'react';
 
 const url = 'https://us-central1-prova-front-letras.cloudfunctions.net/ranking';
@@ -92,6 +91,7 @@ export default function Ranking(){
     .then(function(data) {
       setRanking(data);
     }).catch(function(error) {
+      alert("Ocorreu um erro :(");
       console.log(error);
     });
   },[]);
