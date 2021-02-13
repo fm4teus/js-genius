@@ -12,6 +12,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
+import * as Tone from 'tone'
+
 const url = "https://us-central1-prova-front-letras.cloudfunctions.net/save";
 
 
@@ -132,6 +134,17 @@ export default function Game(){
 		GAME: 'GAME',
 		RESULT: 'RESULT',
 	  };
+	const notes = {
+		1: 'C4',
+		2: 'D4',
+		3: 'E4',
+		4: 'F4',
+		5: 'G4',
+		6: 'A4',
+		7: 'B4',
+		8: 'C5',
+		9: 'D5'
+	  };
 	
 	const [screenState, setScreenState] = useState( screenStates.DISPLAY );   
 	const firstDigit = getRandomDigit(); 
@@ -142,12 +155,18 @@ export default function Game(){
 	const [ animate, setAnimate ] = useState(true);
 	
 	const [ keyPressed, setKeyPressed ] = useState( undefined );
-
+	
 	useEffect(() => {
 		setAnimate(true);
+		const synth = new Tone.Synth().toDestination();
+		//create a synth and connect it to the main output (your speakers)
+		//play a middle 'C' for the duration of an 8th note
+
+		synth.triggerAttackRelease( notes[solution[index]] , "8n");
 		const timer = setTimeout(() => {
 			if(index < solution.length){
 				setIndex( index+1 )
+
 			}else{
 				setScreenState(screenStates.GAME);
 				setAnimate(false);
@@ -177,6 +196,9 @@ export default function Game(){
 		}else{
 			setScreenState(screenStates.RESULT)
 		}
+
+		
+
 		setAnswerIndex(answerIndex+1);
 		
 		console.log("key: ", key, "solution_ans_index: ", solution[answerIndex], "index_answer: ", answerIndex, "INDEX: ", index);
