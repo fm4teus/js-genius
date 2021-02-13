@@ -16,3 +16,5 @@ const ScoreDisplay = styled.div`
 		color: ${({theme})=>theme.colors.textPrimary};
 	}
 `
+
+export default ScoreDisplay;

@@ -10,8 +10,6 @@ const Key = styled.td`
     &:hover{
         background-color: ${({theme})=>theme.colors.primary};
         color: ${({theme})=>theme.colors.textPrimary}
-    }&:disabled{
-        background-color: ${({theme})=>theme.colors.primary};
     }
     input{
         width:4rem;

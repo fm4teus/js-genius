@@ -12,9 +12,7 @@ const Container = styled.div`
   img{
     width: 70%;
   }
-  a{
-    width: 89%;
-  }
+  
 `
 
 export default Container;

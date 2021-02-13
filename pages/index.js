@@ -4,6 +4,8 @@ import Link from '../src/components/Link';
 import Background from '../src/components/Background';
 import Container from '../src/components/Container';
 import Header from '../src/components/Header';
+import { useRouter } from 'next/router';
+
 
 const LogoContainer = styled.div`
   width: 100%;
@@ -18,6 +20,7 @@ const HeaderIndex = styled(Header)`
 `
 
 export default function Home() {
+  const router = useRouter();
   return (
     <Background>
       <Container>
@@ -29,9 +32,9 @@ export default function Home() {
         <LogoContainer>
           <img src="../assets/logo.svg" alt="logo" />
         </LogoContainer>
-        <Link href="/game">
-          <Button>Iniciar Jogo</Button>
-        </Link>
+        
+        <Button style={{width:'89%'}} onClick={()=>{router.push('/game')}} >Iniciar Jogo</Button>
+        
       </Container>
     </Background>
   );
