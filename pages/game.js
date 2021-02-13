@@ -49,13 +49,16 @@ export default function Game(){
 	const [ answerIndex, setAnswerIndex ] = useState(0);
 	const [ animate, setAnimate ] = useState(true);
 	const [ keyPressed, setKeyPressed ] = useState( undefined );
-	const synth = new Tone.Synth().toDestination();
+	
+
+	
 
 	useEffect(() => {
+		const synth = new Tone.Synth().toDestination();
 		setAnimate(true);
 		// som 
+		
 		synth.triggerAttackRelease( notes[solution[index]] , "8n");
-
 		const timer = setTimeout(() => {
 			if(index < solution.length){
 				setIndex( index+1 )
@@ -78,6 +81,7 @@ export default function Game(){
 
 	function keyClicked(e){
 		e.preventDefault();
+		const synth = new Tone.Synth().toDestination();
 		const key = e.target.dataset.key
 		//som
 		
